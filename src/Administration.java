@@ -10,9 +10,19 @@ import java.util.Scanner;
  * The patient data is available via the data member currentPatient.
  */
 class Administration {
+    public static void wait(int ms)
+    {
+        try
+        {
+            Thread.sleep(ms);
+        }
+        catch(InterruptedException ex)
+        {
+            Thread.currentThread().interrupt();
+        }
+    }
     static final int STOP = 0;
     static final int VIEW = 1;
-
     Patient currentPatient;            // The currently selected patient
     User currentUser;               // the current user of the program.
 
@@ -41,19 +51,26 @@ class Administration {
             System.out.format("%d:  View patient data\n", VIEW);
 
             System.out.print("enter #choice: ");
-            int choice = scanner.nextInt();
-            switch (choice) {
-                case STOP: // interrupt the loop
-                    nextCycle = false;
-                    break;
+            try {
+                int choice = scanner.nextInt();
+                switch (choice) {
+                    case STOP: // interrupt the loop
+                        nextCycle = false;
+                        break;
 
-                case VIEW:
-                    currentPatient.viewData();
-                    break;
+                    case VIEW:
+                        currentPatient.viewData();
+                        break;
 
-                default:
-                    System.out.println("Please enter a *valid* digit");
-                    break;
+                    default:
+                        System.out.println("Please enter a *valid* digit");
+                        break;
+                }
+            } catch(Exception ex) {
+                System.out.println("Input doesn't match expected input, please try again");
+                wait(2000);
+                scanner.nextLine();
+                continue;
             }
         }
     }
