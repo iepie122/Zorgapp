@@ -11,9 +11,17 @@ import java.util.Scanner;
  */
 class Administration {
     static final int STOP = 0;
-    static final int VIEW = 1;
+    static final int Puffelen = 1;
+    static final int Bartels = 2;
+    static final int Vettel = 3;
+    static final int Verstappen = 4;
+    static final int Latifi = 5;
 
-    Patient currentPatient;            // The currently selected patient
+    Patient Pierre;            // The currently selected patient
+    Patient Bart;            // The currently selected patient
+    Patient Sebastian;            // The currently selected patient
+    Patient Max;            // The currently selected patient
+    Patient Nicholas;            // The currently selected patient
     User currentUser;               // the current user of the program.
 
     /**
@@ -21,7 +29,11 @@ class Administration {
      */
     Administration(User user) {
         currentUser = user;
-        currentPatient = new Patient(1, "Van Puffelen", "Pierre", LocalDate.of(2000, 2, 29));
+        Pierre = new Patient(1, "Van Puffelen", "Pierre", LocalDate.of(2000, 2, 29));
+        Bart = new Patient(23, "Bartels", "Bart", LocalDate.of(1980, 9, 12));
+        Sebastian = new Patient(5, "Vettel", "Sebastian", LocalDate.of(1987, 7, 3));
+        Max = new Patient(33, "Verstappen", "Max", LocalDate.of(1997, 9, 30));
+        Nicholas = new Patient(6, "Latifi", "Nicholas", LocalDate.of(1995, 6, 29));
 
         System.out.format("Current user: [%d] %s\n", user.getUserID(), user.getUserName());
     }
@@ -32,13 +44,17 @@ class Administration {
         boolean nextCycle = true;
         while (nextCycle) {
             System.out.format("%s\n", "=".repeat(80));
-            System.out.format("Current patient: %s\n", currentPatient.fullName());
+            System.out.format("Current patient: %s\n", Pierre, Bart, Sebastian, Max, Nicholas.fullName());
 
             /*
              Print menu on screen
             */
             System.out.format("%d:  STOP\n", STOP);
-            System.out.format("%d:  View patient data\n", VIEW);
+            System.out.format("%d:  View Pierre van Puffelen data\n", Puffelen);
+            System.out.format("%d:  View Bart Bartels data\n", Bartels);
+            System.out.format("%d:  View Sebastian Vettel data\n", Vettel);
+            System.out.format("%d:  View Max Verstappen data\n", Verstappen);
+            System.out.format("%d:  View Nicholas Latifi data\n", Latifi);
 
             System.out.print("enter #choice: ");
             int choice = scanner.nextInt();
@@ -47,8 +63,24 @@ class Administration {
                     nextCycle = false;
                     break;
 
-                case VIEW:
-                    currentPatient.viewData();
+                case Puffelen:
+                    Pierre.viewData();
+                    break;
+
+                case Bartels:
+                    Bart.viewData();
+                    break;
+
+                case Vettel:
+                    Sebastian.viewData();
+                    break;
+
+                case Verstappen:
+                    Max.viewData();
+                    break;
+
+                case Latifi:
+                    Nicholas.viewData();
                     break;
 
                 default:
