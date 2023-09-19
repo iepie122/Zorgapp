@@ -8,6 +8,7 @@ class Patient {
    static final int HEIGHT      = 4;
    static final int WEIGHT      = 5;
    static final int BMI         = 6;
+   static final int MEDICATION  = 7;
 
    int       id;
    String    surname;
@@ -15,17 +16,19 @@ class Patient {
    LocalDate dateOfBirth;
    double    height;
    int       weight;
+   String    medication;
 
     /**
      * Constructor
      */
-    Patient(int id, String surname, String firstName, LocalDate dateOfBirth, double height, int weight) {
+    Patient(int id, String surname, String firstName, String medication, LocalDate dateOfBirth, double height, int weight) {
         this.id = id;
         this.surname = surname;
         this.firstName = firstName;
         this.dateOfBirth = dateOfBirth;
         this.height = height;
         this.weight = weight;
+        this.medication = medication;
     }
 
     String getSurname() {
@@ -47,13 +50,14 @@ class Patient {
         System.out.format("%-17s %s\n", "Height (m):", height);
         System.out.format("%-17s %s\n", "Weight (kg):", weight);
         System.out.format("%-17s %s\n", "BMI:", CalcBmi());
+        System.out.format("%-17s %s\n", "Medication:", medication);
     }
 
     /**
      * Shorthand for a Patient's full name
      */
     String fullName() {
-        return String.format("%s %s [%s]", firstName, surname, dateOfBirth.toString());
+        return String.format("%s %s [%s]", firstName, surname, dateOfBirth, medication.toString());
     }
     double CalcBmi() {
         double bmi = weight / (height * height);
