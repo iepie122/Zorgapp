@@ -10,10 +10,20 @@ import java.util.Scanner;
  * The patient data is available via the data member currentPatient.
  */
 class Administration {
-    static final int STOP = 0;
-    static final int VIEW = 1;
 
-    Patient currentPatient;            // The currently selected patient
+    static final int Puffelen = 1;
+    static final int Tiegelaar = 2;
+    static final int Kiezelsteen = 3;
+    static final int Bootsman = 4;
+    static final int Anderson = 5;
+
+
+    Patient Pierre;            // The currently selected patient
+    Patient Bart;            // The currently selected patient
+    Patient Kees;
+    Patient Sandra;
+    Patient Natasha;
+    Patient Terug;
     User currentUser;               // the current user of the program.
 
     /**
@@ -21,36 +31,120 @@ class Administration {
      */
     Administration(User user) {
         currentUser = user;
-        currentPatient = new Patient(1, "Van Puffelen", "Pierre", LocalDate.of(2000, 2, 29));
+        Pierre = new Patient(1, "Van Puffelen", "Pierre", LocalDate.of(2000, 2, 29), "paracetemol", "Leeg");
+        Bart = new Patient(3, "Tiegelaar", "Bart", LocalDate.of(2001, 6, 18), "Antibiotica", "Pfeiffer");
+        Kees = new Patient(4, "Kiezelsteen", "Kees", LocalDate.of(1995, 12, 30), "Aurobindo", "Depression");
+        Sandra = new Patient(5, "Bootsman", "Sandra", LocalDate.of(1999, 7, 17), "Anticonceptie, Paracetemol, Ibuprofen", "Menstruatie klachten");
+        Natasha = new Patient(6, "Anderson", "Natasha", LocalDate.of(1982, 4, 16), "Anticonceptie, Ibuprofen", "Hoofdpijn");
 
-        System.out.format("Current user: [%d] %s\n", user.getUserID(), user.getUserName());
+        System.out.format("Current user: [%d] %s\n", user.getUserID(), user.getUserName(), user.getUserJob());
     }
+    void patientenlijst() {
+        var scanner = new Scanner(System.in);  // User input via this scanner.
+        System.out.format("%s\n", "=".repeat(80));
+        System.out.format("patients: %s\n", Pierre, Bart, Kees, Sandra, Natasha.fullName());
 
+        System.out.format("%d:  View Pierre van Puffelen data\n", Puffelen);
+        System.out.format("%d:  View Bart Tiegelaar data\n", Tiegelaar);
+        System.out.format("%d:  View Kees Kiezelsteen data\n", Kiezelsteen);
+        System.out.format("%d:  View Sandra Bootsman data\n", Bootsman);
+        System.out.format("%d:  View Natasha Anderson data\n", Anderson);
+
+        int choice = scanner.nextInt();
+        switch (choice) {
+
+            case Puffelen:
+                Pierre.viewData();
+                break;
+
+            case Tiegelaar:
+                Bart.viewData();
+                break;
+
+            case Kiezelsteen:
+                Kees.viewData();
+                break;
+
+            case Bootsman:
+                Sandra.viewData();
+                break;
+
+            case Anderson:
+                Natasha.viewData();
+                break;
+
+            default:
+                System.out.println("Please enter a *valid* digit");
+                break;
+        }
+    }
+void geenToegang() {
+        System.out.println("Sorry, u heeft geen toegang tot patiënten");
+}
+    static final int Huisarts = 1;
+    static final int Apotheker = 2;
+    static final int Fysiotherapeut = 3;
+    static final int Tandarts  = 4;
+    static final int GeenVanBovenstaande= 0;
+
+void startMenu() {
+    var scanner = new Scanner(System.in);  // User input via this scanner.
+
+    System.out.println("Wat is uw beroep");
+
+    System.out.format("%d: Huisarts\n", Huisarts);
+    System.out.format("%d: Apotheker\n", Apotheker);
+    System.out.format("%d: Fysiotherapeut\n", Fysiotherapeut);
+    System.out.format("%d: Tandarts\n",Tandarts );
+    System.out.format("%d: Geen van bovenstaande\n", GeenVanBovenstaande);
+
+    int choice = scanner.nextInt();
+    switch (choice) {
+
+        case Huisarts:
+            patientenlijst();
+            break;
+
+        case Apotheker:
+            patientenlijst();
+            break;
+
+        case Fysiotherapeut:
+            patientenlijst();
+            break;
+
+        case Tandarts:
+            patientenlijst();
+            break;
+
+        case GeenVanBovenstaande:
+            geenToegang();
+            break;
+
+        default:
+            System.out.println("Please enter a *valid* digit");
+            break;
+    }
+}
+
+    static final int STOP = 0;
+    static final int StartMenu = 1;
     void menu() {
         var scanner = new Scanner(System.in);  // User input via this scanner.
 
         boolean nextCycle = true;
         while (nextCycle) {
-            System.out.format("%s\n", "=".repeat(80));
-            System.out.format("Current patient: %s\n", currentPatient.fullName());
-
-            /*
-             Print menu on screen
-            */
-            System.out.format("%d:  STOP\n", STOP);
-            System.out.format("%d:  View patient data\n", VIEW);
-
-            System.out.print("enter #choice: ");
+            System.out.format("%d:  Exit\n", STOP);
+            System.out.format("%d: Open Start Menu \n", StartMenu);
+            System.out.println("Type choice:");
             int choice = scanner.nextInt();
             switch (choice) {
                 case STOP: // interrupt the loop
                     nextCycle = false;
                     break;
-
-                case VIEW:
-                    currentPatient.viewData();
+                case StartMenu:
+                    this.startMenu();
                     break;
-
                 default:
                     System.out.println("Please enter a *valid* digit");
                     break;
