@@ -19,4 +19,5 @@ class User {
         return userID;
     }
     String getUserJob() {return userJob; }
+
 }
