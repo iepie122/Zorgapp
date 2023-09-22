@@ -30,10 +30,10 @@ class Administration {
     Administration(User user) {
         currentUser = user;
         Pierre = new Patient(1, "Van Puffelen", "Pierre", "Paracetamol", LocalDate.of(2000, 2, 29), 1.75, 80);
-        Bart = new Patient(23, "Bartels", "Bart", "Zetpil", LocalDate.of(1980, 9, 12), 1.80, 100);
-        Sebastian = new Patient(5, "Vettel", "Sebastian", "None", LocalDate.of(1987, 7, 3), 1.75, 62);
-        Max = new Patient(33, "Verstappen", "Max", "None", LocalDate.of(1997, 9, 30), 1.81, 72);
-        Nicholas = new Patient(6, "Latifi", "Nicholas", "None", LocalDate.of(1995, 6, 29), 1.85, 73);
+        Bart = new Patient(23, "Bartels", "Bart", "Ibuprofen", LocalDate.of(1980, 9, 12), 1.80, 100);
+        Sebastian = new Patient(5, "Vettel", "Sebastian", "No meds", LocalDate.of(1987, 7, 3), 1.75, 62);
+        Max = new Patient(33, "Verstappen", "Max", "No meds", LocalDate.of(1997, 9, 30), 1.81, 72);
+        Nicholas = new Patient(6, "Latifi", "Nicholas", "No meds", LocalDate.of(1995, 6, 29), 1.85, 73);
 
         System.out.format("Current user: [%d] %s\n", user.getUserID(), user.getUserName());
     }
