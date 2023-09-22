@@ -2,10 +2,7 @@ import java.time.*;
 import java.util.Scanner;
 
 class Patient {
-    static final int RETURN = 0;
-    static final int SURNAME = 1;
-    static final int FIRSTNAME = 2;
-    static final int DATEOFBIRTH = 3;
+
 
     int id;
     String surname;
@@ -27,13 +24,7 @@ class Patient {
 
     }
 
-    String getSurname() {
-        return surname;
-    }
 
-    String getFirstName() {
-        return firstName;
-    }
 
     /**
      * Display patient data.
