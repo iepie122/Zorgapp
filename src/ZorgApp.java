@@ -4,5 +4,6 @@ class ZorgApp {
         Administration administration = new Administration(user);
 
         administration.menu();
+
     }
 }
