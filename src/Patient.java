@@ -1,5 +1,5 @@
 import java.time.*;
-import java.util.Scanner;
+
 
 class Patient {
 
@@ -56,8 +56,7 @@ class Patient {
     }
     double calcBmi() {
         double bmi = weight / (length * length);
-        double roundedBmi = Math.round(bmi * 100.0) / 100.0;
-        return roundedBmi;
+        return Math.round(bmi * 100.0) / 100.0;
         //Dit is BMI berekening na het afronden
     }
 }

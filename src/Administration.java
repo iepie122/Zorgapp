@@ -64,21 +64,16 @@ class Administration {
             System.out.print("enter #choice: ");
             int choice = scanner.nextInt();
             switch (choice) {
-                case STOP: // interrupt the loop
-                    nextCycle = false;
-                    break;
-
-                case VIEW:
+                case STOP -> // interrupt the loop
+                        nextCycle = false;
+                case VIEW -> {
                     Adam.viewData();
                     Natasha.viewData();
                     Anton.viewData();
                     Shannon.viewData();
                     Daisy.viewData();
-                    break;
-
-                default:
-                    System.out.println("Please enter a *valid* digit");
-                    break;
+                }
+                default -> System.out.println("Please enter a *valid* digit");
             }
         }
     }
