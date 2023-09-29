@@ -56,7 +56,6 @@ class Patient {
         System.out.format("%-17s %s\n", "Weight (kg):", weight);
         System.out.format("%-17s %s\n", "BMI:", CalcBmi());
         System.out.format("%-17s %s\n", "Medication:", medication);
-        System.out.format("\n Would you like to edit this data? (y/n)\n");
     }
 
     Scanner scanner = new Scanner(System.in);
