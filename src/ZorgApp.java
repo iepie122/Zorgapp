@@ -5,6 +5,6 @@ class ZorgApp {
         User user = new User(1, "Mart ElCamera");
         Administration administration = new Administration(user);
 
-        administration.menu();
+        administration.menu2();
     }
 }

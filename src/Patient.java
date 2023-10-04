@@ -1,6 +1,9 @@
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
+
 
 class Patient {
    static final int RETURN      = 0;
@@ -13,6 +16,7 @@ class Patient {
    static final int BMI         = 7;
    static final int MEDICATION  = 8;
 
+
    int       id;
    String    surname;
    String    firstName;
@@ -20,6 +24,8 @@ class Patient {
    double    height;
    int       weight;
    String    medication;
+
+
 
     /**
      * Constructor
@@ -32,15 +38,29 @@ class Patient {
         this.height = height;
         this.weight = weight;
         this.medication = medication;
+
+
     }
 
-    String getSurname() {
-        return surname;
-    }
+    String getSurname() {return surname;}
+    LocalDate getDateOfBirth() {return dateOfBirth;}
+
+    double getHeight() {return height;}
+    int getWeight() {return weight;}
 
     String getFirstName() {
         return firstName;
     }
+    String getMedication() {
+        return medication;
+    }
+
+
+
+
+
+
+
 
     /**
      * Display patient data.
@@ -56,9 +76,67 @@ class Patient {
         System.out.format("%-17s %s\n", "Weight (kg):", weight);
         System.out.format("%-17s %s\n", "BMI:", CalcBmi());
         System.out.format("%-17s %s\n", "Medication:", medication);
+
+
     }
 
-    Scanner scanner = new Scanner(System.in);
+    void EditData() {
+        var scanner = new Scanner(System.in);
+        System.out.format("Wat wilt u veranderen?");
+        System.out.format("%-17s %s\n", "Surname:", surname);
+        System.out.format("%-17s %s\n", "firstName:", firstName);
+        System.out.format("%-17s %s\n", "Date of birth:", dateOfBirth);
+        System.out.format("%-17s %s\n", "Age:", calcAge());
+        System.out.format("%-17s %s\n", "Height (m):", height);
+        System.out.format("%-17s %s\n", "Weight (kg):", weight);
+        System.out.format("%-17s %s\n", "BMI:", CalcBmi());
+        System.out.format("%-17s %s\n", "Medication:", medication);
+
+
+        scanner = new Scanner(System.in);
+            int choice = scanner.nextInt();
+
+            switch (choice) {
+                case 1:
+                    String surname;
+                    System.out.print("Nieuwe achternaam: ");
+                    Scanner input = new Scanner(System.in);
+                    surname = input.next();
+                    System.out.println();
+                    System.out.println("Achternaam: " + surname);
+                    break;
+
+
+
+
+
+                // Add more cases if necessary
+                case 2:
+
+                    String firstName;
+                    System.out.print("New First Name: ");
+                    input = new Scanner(System.in);
+                    firstName = input.next();
+                    System.out.println("first name " + firstName);
+                    System.out.println();
+                    System.out.println(firstName);
+                    break;
+
+
+                default:
+                    System.out.println("Invalid choice");
+
+            }
+
+            // Close the scanner when done
+
+
+
+
+
+    }
+
+
 
 
 
@@ -79,5 +157,5 @@ class Patient {
         LocalDate currentDate = LocalDate.now();
         Period period = Period.between(dateOfBirth, currentDate);
         return (period.getYears());
+        }
     }
-}
