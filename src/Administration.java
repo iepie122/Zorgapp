@@ -1,9 +1,7 @@
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.ArrayList;
 import java.util.List;
-import java.awt.*;
 
 /**
  * class Administration represents the core of the application by showing
@@ -28,13 +26,13 @@ menu();
 
 }
 
-    Patient Pierre = new Patient(1, "Van Puffelen", "Pierre", "Paracetamol", LocalDate.of(2000, 2, 29), 1.75, 80);
-    Patient Bart = new Patient(23, "Bartels", "Bart", "Pijnstiller", LocalDate.of(1980, 9, 12), 1.80, 100);
-    Patient Sebastian = new Patient(5, "Vettel", "Sebastian", "No meds", LocalDate.of(1987, 7, 3), 1.75, 62);
-    Patient Max = new Patient(33, "Verstappen", "Max", "No meds", LocalDate.of(1997, 9, 30), 1.81, 72);
-    Patient Nicholas = new Patient(6, "Latifi", "Nicholas", "No meds", LocalDate.of(1995, 6, 29), 1.85, 73);
+    Patient Pierre = new Patient(1, "Van Puffelen", "Pierre", "Hydrochloorthiazide voor hoge bloeddruk", LocalDate.of(2000, 2, 29), 1.75, 80, "Toets 6 om dit dossier te wijzigen");
+    Patient Bart = new Patient(23, "Bartels", "Bart", "Ibuprofen voor rugpijn", LocalDate.of(1980, 9, 12), 1.80, 100, "Toets 7 om dit dossier te wijzigen");
+    Patient Sebastian = new Patient(5, "Vettel", "Sebastian", "Geen historie beschikbaar", LocalDate.of(1987, 7, 3), 1.75, 62, "Toets 8 om dit dossier te wijzigen");
+    Patient Max = new Patient(33, "Verstappen", "Max", "Geen historie beschikbaar", LocalDate.of(1997, 9, 30), 1.81, 72, "Toets 9 om dit dossier te wijzigen");
+    Patient Nicholas = new Patient(6, "Latifi", "Nicholas", "Geen historie beschikbaar", LocalDate.of(1995, 6, 29), 1.85, 73, "Toets 10 om dit dossier te wijzigen");
     User Huisarts = new User(1, "Huisarts");
-    User Tandarts = new User(2, "Tandarts");
+    User Internist = new User(2, "Internist");
 
     static final int STOP = 0;
     static final int Puffelen = 1;
@@ -62,16 +60,16 @@ menu();
             System.out.format("Current patient: %s\n", Pierre, Bart, Sebastian, Max, Nicholas.fullName());
 
             System.out.format("%d:  STOP\n", STOP);
-            System.out.format("%d:  View Pierre van Puffelen data\n", Puffelen);
-            System.out.format("%d:  View Bart Bartels data\n", Bartels);
-            System.out.format("%d:  View Sebastian Vettel data\n", Vettel);
-            System.out.format("%d:  View Max Verstappen data\n", Verstappen);
-            System.out.format("%d:  View Nicholas Latifi data\n", Latifi);
+            System.out.format("%d:  Toon dossier Pierre van Puffelen\n", Puffelen);
+            System.out.format("%d:  Toon dossier Bart Bartels\n", Bartels);
+            System.out.format("%d:  Toon dossier Sebastian Vettel\n", Vettel);
+            System.out.format("%d:  Toon dossier Max Verstappen\n", Verstappen);
+            System.out.format("%d:  Toon dossier Nicholas Latifi\n", Latifi);
 
         List<User> Userlist = new ArrayList<>();
 
         Userlist.add(Huisarts);
-        Userlist.add(Tandarts);
+        Userlist.add(Internist);
 
         int choice = scanner.nextInt();
         switch (choice) {
@@ -100,33 +98,92 @@ menu();
                 break;
 
             case 6:
-                Pierre.EditData();
+                editMenu(Pierre);
                 break;
 
             case 7:
-                Bart.EditData();
+                editMenu(Bart);
                 break;
 
             case 8:
-                Sebastian.EditData();
+                editMenu(Sebastian);
                 break;
 
             case 9:
-                Max.EditData();
+                editMenu(Max);
                 break;
 
             case 10:
-                Nicholas.EditData();
+                editMenu(Nicholas);
                 break;
 
             default:
-                System.out.println("Please enter a *valid* digit");
+                System.out.println("Toets een geldige waarde in a.u.b.");
                 break;
 
             }
         }
     }
 
+    void editMenu(Patient patient) {
+        var scanner = new Scanner(System.in);
+        boolean editCycle = true;
+
+        while (editCycle) {
+            System.out.format("%s\n", "=".repeat(80));
+            System.out.format("Editing patient data for %s:\n", patient.fullName());
+            System.out.println("0: STOPPEN");
+            System.out.println("1: Wijzig voornaam");
+            System.out.println("2: Wijzig achternaam");
+            System.out.println("3: Wijzig historie");
+            System.out.println("4: Wijzig geboortedatum");
+            System.out.println("5: Wijzig lengte");
+            System.out.println("6: Wijzig gewicht");
+
+            int editChoice = scanner.nextInt();
+            switch (editChoice) {
+                case 0:
+                    editCycle = false;
+                    break;
+                case 1:
+                    System.out.print("Nieuwe voornaam: ");
+                    scanner.nextLine();  // Consume newline
+                    String newName = scanner.nextLine();
+                    patient.setFirstname(newName);
+                    break;
+                case 2:
+                    System.out.print("Nieuwe achternaam: ");
+                    scanner.nextLine();  // Consume newline
+                    String newSurname = scanner.nextLine();
+                    patient.setSurname(newSurname);
+                    break;
+                case 3:
+                    System.out.print("Nieuwe historie: ");
+                    scanner.nextLine();  // Consume newline
+                    String newMedication = scanner.nextLine();
+                    patient.setMedication(newMedication);
+                    break;
+                case 4:
+                    System.out.print("Nieuwe geboortedatum (yyyy-MM-dd): ");
+                    LocalDate newBirthdate = LocalDate.parse(scanner.next());
+                    patient.setDateOfBirth(newBirthdate);
+                    break;
+                case 5:
+                    System.out.print("Nieuwe lengte (in meters): ");
+                    double newHeight = scanner.nextDouble();
+                    patient.setHeight(newHeight);
+                    break;
+                case 6:
+                    System.out.print("Nieuw gewicht (in kilogram): ");
+                    int newWeight = (int) scanner.nextDouble();
+                    patient.setWeight((int) newWeight);
+                    break;
+                default:
+                    System.out.println("Ongeldig. Toets een geldige waarde in a.u.b.");
+                    break;
+            }
+        }
+    }
     static final int HuisArts = 11;
     static final int TandArts = 12;
     void menu2() {
@@ -137,9 +194,9 @@ menu();
         System.out.format("%s\n", "=".repeat(80));
         System.out.format("Current user: %s\n", currentUser.getUserName());
 
-        System.out.println("Enter 11 to view the patientlist (HuisArts)");
-        System.out.println("Enter 12 to view the patientlist (TandArts)");
-        System.out.println("Enter 0 to STOP");
+        System.out.println("Toets 11 als u HUISARTS wilt doorgaan");
+        System.out.println("Toets 12 als u INTERNIST wilt doorgaan");
+        System.out.println("Toets 0 om te STOPPEN");
 
             int choice = scanner.nextInt();
             switch (choice) {

@@ -1,20 +1,18 @@
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
 
 
 class Patient {
-   static final int RETURN      = 0;
-   static final int SURNAME     = 1;
-   static final int FIRSTNAME   = 2;
-   static final int DATEOFBIRTH = 3;
-   static final int AGE         = 4;
-   static final int HEIGHT      = 5;
-   static final int WEIGHT      = 6;
-   static final int BMI         = 7;
-   static final int MEDICATION  = 8;
+//   static final int RETURN      = 0;
+//   static final int SURNAME     = 1;
+//   static final int FIRSTNAME   = 2;
+//   static final int DATEOFBIRTH = 3;
+//   static final int AGE         = 4;
+//   static final int HEIGHT      = 5;
+//   static final int WEIGHT      = 6;
+//   static final int BMI         = 7;
+//   static final int MEDICATION  = 8;
 
 
    int       id;
@@ -24,13 +22,14 @@ class Patient {
    double    height;
    int       weight;
    String    medication;
+   String    editData;
 
 
 
     /**
      * Constructor
      */
-    Patient(int id, String surname, String firstName, String medication, LocalDate dateOfBirth, double height, int weight) {
+    Patient(int id, String surname, String firstName, String medication, LocalDate dateOfBirth, double height, int weight, String editData) {
         this.id = id;
         this.surname = surname;
         this.firstName = firstName;
@@ -38,29 +37,20 @@ class Patient {
         this.height = height;
         this.weight = weight;
         this.medication = medication;
-
+        this.editData = editData;
 
     }
 
-    String getSurname() {return surname;}
-    LocalDate getDateOfBirth() {return dateOfBirth;}
-
-    double getHeight() {return height;}
-    int getWeight() {return weight;}
-
-    String getFirstName() {
-        return firstName;
-    }
-    String getMedication() {
-        return medication;
-    }
-
-
-
-
-
-
-
+//    String getSurname() {return surname;}
+//    LocalDate getDateOfBirth() {return dateOfBirth;}
+//    double getHeight() {return height;}
+//    int getWeight() {return weight;}
+//    String getFirstName() {
+//        return firstName;
+//    }
+//    String getMedication() {
+//        return medication;
+//    }
 
     /**
      * Display patient data.
@@ -68,77 +58,42 @@ class Patient {
     void viewData() {
         var scanner = new Scanner(System.in);
         System.out.format("===== Patient id=%d ==============================\n", id);
-        System.out.format("%-17s %s\n", "Surname:", surname);
-        System.out.format("%-17s %s\n", "firstName:", firstName);
-        System.out.format("%-17s %s\n", "Date of birth:", dateOfBirth);
-        System.out.format("%-17s %s\n", "Age:", calcAge());
-        System.out.format("%-17s %s\n", "Height (m):", height);
-        System.out.format("%-17s %s\n", "Weight (kg):", weight);
+        System.out.format("%-17s %s\n", "Achternaam:", surname);
+        System.out.format("%-17s %s\n", "Voornaam:", firstName);
+        System.out.format("%-17s %s\n", "Geboortedatum:", dateOfBirth);
+        System.out.format("%-17s %s\n", "Leeftijd:", calcAge());
+        System.out.format("%-17s %s\n", "Lengte (m):", height);
+        System.out.format("%-17s %s\n", "Gewicht (kg):", weight);
         System.out.format("%-17s %s\n", "BMI:", CalcBmi());
-        System.out.format("%-17s %s\n", "Medication:", medication);
+        System.out.format("%-17s %s\n", "Historie:", medication);
+        System.out.format("%-17s %s\n", "Dossier wijzigen?", editData);
 
 
     }
 
-    void EditData() {
-        var scanner = new Scanner(System.in);
-        System.out.format("Wat wilt u veranderen?");
-        System.out.format("%-17s %s\n", "Surname:", surname);
-        System.out.format("%-17s %s\n", "firstName:", firstName);
-        System.out.format("%-17s %s\n", "Date of birth:", dateOfBirth);
-        System.out.format("%-17s %s\n", "Age:", calcAge());
-        System.out.format("%-17s %s\n", "Height (m):", height);
-        System.out.format("%-17s %s\n", "Weight (kg):", weight);
-        System.out.format("%-17s %s\n", "BMI:", CalcBmi());
-        System.out.format("%-17s %s\n", "Medication:", medication);
-
-
-        scanner = new Scanner(System.in);
-            int choice = scanner.nextInt();
-
-            switch (choice) {
-                case 1:
-                    String surname;
-                    System.out.print("Nieuwe achternaam: ");
-                    Scanner input = new Scanner(System.in);
-                    surname = input.next();
-                    System.out.println();
-                    System.out.println("Achternaam: " + surname);
-                    break;
-
-
-
-
-
-                // Add more cases if necessary
-                case 2:
-
-                    String firstName;
-                    System.out.print("New First Name: ");
-                    input = new Scanner(System.in);
-                    firstName = input.next();
-                    System.out.println("first name " + firstName);
-                    System.out.println();
-                    System.out.println(firstName);
-                    break;
-
-
-                default:
-                    System.out.println("Invalid choice");
-
-            }
-
-            // Close the scanner when done
-
-
-
-
-
+    public void setFirstname(String firstName) {
+        this.firstName = firstName;
     }
 
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
 
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 
+    public void setHeight(double height) {
+        this.height = height;
+    }
 
+    public void setWeight(int weight) {
+        this.weight = weight;
+    }
+
+    public void setMedication(String medication) {
+        this.medication = medication;
+    }
 
     /**
      * Shorthand for a Patient's full name
