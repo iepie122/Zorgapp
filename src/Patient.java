@@ -14,7 +14,6 @@ class Patient {
 //   static final int BMI         = 7;
 //   static final int MEDICATION  = 8;
 
-
    int       id;
    String    surname;
    String    firstName;
@@ -22,14 +21,13 @@ class Patient {
    double    height;
    int       weight;
    String    medication;
+   String    history;
    String    editData;
-
-
 
     /**
      * Constructor
      */
-    Patient(int id, String surname, String firstName, String medication, LocalDate dateOfBirth, double height, int weight, String editData) {
+    Patient(int id, String surname, String firstName, String medication, LocalDate dateOfBirth, double height, int weight, String history, String editData) {
         this.id = id;
         this.surname = surname;
         this.firstName = firstName;
@@ -37,20 +35,9 @@ class Patient {
         this.height = height;
         this.weight = weight;
         this.medication = medication;
+        this.history = history;
         this.editData = editData;
-
     }
-
-//    String getSurname() {return surname;}
-//    LocalDate getDateOfBirth() {return dateOfBirth;}
-//    double getHeight() {return height;}
-//    int getWeight() {return weight;}
-//    String getFirstName() {
-//        return firstName;
-//    }
-//    String getMedication() {
-//        return medication;
-//    }
 
     /**
      * Display patient data.
@@ -64,50 +51,47 @@ class Patient {
         System.out.format("%-17s %s\n", "Leeftijd:", calcAge());
         System.out.format("%-17s %s\n", "Lengte (m):", height);
         System.out.format("%-17s %s\n", "Gewicht (kg):", weight);
-        System.out.format("%-17s %s\n", "BMI:", CalcBmi());
-        System.out.format("%-17s %s\n", "Historie:", medication);
-        System.out.format("%-17s %s\n", "Dossier wijzigen?", editData);
-
-
+        System.out.format("%-17s %s\n", "BMI:", calcBmi());
+        System.out.format("%-17s %s\n", "Medicatie:", medication);
+        System.out.format("%-17s %s\n", "Historie:", history);
+        System.out.format("%-17s %s\n", "Dossier aanpassen?", editData);
     }
 
     public void setFirstname(String firstName) {
         this.firstName = firstName;
     }
-
     public void setSurname(String surname) {
         this.surname = surname;
     }
-
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-
     public void setHeight(double height) {
         this.height = height;
     }
-
     public void setWeight(int weight) {
         this.weight = weight;
     }
-
     public void setMedication(String medication) {
         this.medication = medication;
+    }
+    public void setHistory(String history) {
+        this.history = history;
     }
 
     /**
      * Shorthand for a Patient's full name
      */
     String fullName() {
-        return String.format("%s %s [%s]", firstName, surname, dateOfBirth, medication.toString());
+        return String.format("%s %s [%s]", firstName, surname, dateOfBirth, medication, history, editData.toString());
     }
-    double CalcBmi() {
+    double calcBmi() {
         // This calculates the patient's BMI
         double bmi = weight / (height * height);
         double roundedBmi = Math.round(bmi* 100.0) / 100.0;
         return roundedBmi;
     }
-    Integer calcAge() {
+    int calcAge() {
         // This calculates the patient's age
         LocalDate currentDate = LocalDate.now();
         Period period = Period.between(dateOfBirth, currentDate);
