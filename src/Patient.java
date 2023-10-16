@@ -96,5 +96,5 @@ class Patient {
         LocalDate currentDate = LocalDate.now();
         Period period = Period.between(dateOfBirth, currentDate);
         return (period.getYears());
-        }
     }
+}

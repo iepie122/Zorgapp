@@ -15,16 +15,16 @@ class Administration {
 
     List<Patient> patientList = new ArrayList<>();
 
-public void patientData() {
-    System.out.println("Patientenlijst:");
+    public void patientData() {
+        System.out.println("Patientenlijst:");
 
-    for (Patient patient : patientList) {
-        System.out.println(patient.toString());
+        for (Patient patient : patientList) {
+            System.out.println(patient.toString());
+
+        }
+        menu();
 
     }
-menu();
-
-}
 
     Patient Pierre = new Patient(1, "Van Puffelen", "Pierre", "Hydrochloorthiazide", LocalDate.of(2000, 2, 29), 1.75, 80, "Hypertensie", "Toets [6]");
     Patient Bart = new Patient(23, "Bartels", "Bart", "Ibuprofen", LocalDate.of(1980, 9, 12), 1.80, 100, "Migraine", "Toets [7]");
